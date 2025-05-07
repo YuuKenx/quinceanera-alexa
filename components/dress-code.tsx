@@ -1,4 +1,4 @@
-import { TerminalIcon as Tuxedo, Sparkles } from "lucide-react"
+import { Shirt, Sparkles } from "lucide-react"
 import { Card } from "@/components/ui/card"
 import RevealText from "@/components/reveal-text"
 
@@ -10,7 +10,7 @@ export default function DressCode() {
         <div className="flex justify-center space-x-8 mb-6">
           <div className="flex flex-col items-center">
             <div className="bg-secondary/20 p-3 rounded-full mb-2">
-              <Tuxedo className="h-8 w-8 text-primary" />
+              <Shirt className="h-8 w-8 text-primary" />
             </div>
             <p className="text-sm">Caballeros</p>
           </div>
