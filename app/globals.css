@@ -1,12 +1,10 @@
-/* Eliminamos la importación externa de la fuente y usaremos una alternativa local */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 350 100% 98%;
-  --foreground: 340 60% 30%;
+  --background: 350 100% 97%; /* Rosa muy claro para el fondo */
+  --foreground: 340 60% 30%; /* Rosa oscuro para el texto */
 
   --card: 0 0% 100%;
   --card-foreground: 340 60% 30%;
@@ -14,23 +12,23 @@
   --popover: 0 0% 100%;
   --popover-foreground: 340 60% 30%;
 
-  --primary: 340 80% 75%;
+  --primary: 340 80% 75%; /* Rosa para elementos primarios */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 350 100% 96%;
+  --secondary: 340 100% 90%; /* Rosa claro para elementos secundarios */
   --secondary-foreground: 340 60% 30%;
 
-  --muted: 350 100% 96%;
+  --muted: 340 30% 96%; /* Rosa muted */
   --muted-foreground: 340 50% 50%;
 
-  --accent: 350 100% 96%;
+  --accent: 340 80% 90%; /* Rosa para acentos */
   --accent-foreground: 340 60% 30%;
 
   --destructive: 0 100% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 340 70% 90%;
-  --input: 340 70% 90%;
+  --border: 340 70% 80%; /* Bordes rosa */
+  --input: 340 70% 80%;
   --ring: 340 80% 75%;
 
   --radius: 0.5rem;
@@ -63,6 +61,7 @@ body {
   }
 }
 
+/* Actualizar el fondo animado con los nuevos colores */
 .bg-animate {
   background: linear-gradient(-45deg, #ffe6f2, #ffcce6, #ffb3d9, #ff99cc);
   background-size: 400% 400%;

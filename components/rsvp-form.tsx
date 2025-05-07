@@ -61,7 +61,7 @@ export default function RSVPForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="mt-1 border-secondary"
+            className="mt-1 border-secondary bg-pink-50"
             placeholder="Ej. Familia Rodríguez"
           />
         </div>
@@ -135,14 +135,14 @@ export default function RSVPForm() {
               id="attendees"
               value={attendeeNames}
               onChange={(e) => setAttendeeNames(e.target.value)}
-              className="mt-1 border-secondary"
+              className="mt-1 border-secondary bg-pink-50"
               placeholder="Ej. Juan Pérez, María López"
             />
           </div>
         )}
 
         <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-          <Button type="submit" className="w-full bg-primary hover:bg-pink-600 text-white">
+          <Button type="submit" className="w-full bg-pink-400 hover:bg-pink-500 text-white">
             <Send className="mr-2 h-4 w-4" /> Confirmar por WhatsApp
           </Button>
         </motion.div>

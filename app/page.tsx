@@ -78,7 +78,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative min-h-screen bg-gradient-to-b from-pink-50 to-pink-100 text-pink-900">
+    <main className="relative min-h-screen bg-pink-50 text-pink-900">
       <FloatingElements />
       {/* Background Music */}
       <audio id="background-music" loop>
@@ -88,7 +88,7 @@ export default function Home() {
       {/* Music Control */}
       <button
         onClick={() => setIsPlaying(!isPlaying)}
-        className="fixed top-4 right-4 z-50 p-2 bg-secondary rounded-full shadow-md hover:bg-amber-300 transition-all"
+        className="fixed top-4 right-4 z-50 p-2 bg-pink-200 rounded-full shadow-md hover:bg-pink-300 transition-all"
         aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
       >
         {isPlaying ? <MusicOff size={20} /> : <Music size={20} />}
@@ -97,11 +97,11 @@ export default function Home() {
       {/* Countdown Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
-          <Card className="w-[90%] max-w-md p-6 bg-white border-secondary shadow-xl">
-            <h2 className="text-2xl font-dancing text-center mb-4 text-primary">Faltan</h2>
+          <Card className="w-[90%] max-w-md p-6 bg-white border-pink-200 shadow-xl">
+            <h2 className="text-2xl font-dancing text-center mb-4 text-pink-500">Faltan</h2>
             <CountdownTimer targetDate={eventDate} />
-            <p className="text-center mt-4 mb-6 font-light">Para los XV años de Alexa</p>
-            <Button onClick={closeModal} className="w-full bg-primary hover:bg-pink-600 text-white">
+            <p className="text-center mt-4 mb-6 font-light">Para la quinceañera de Alexa</p>
+            <Button onClick={closeModal} className="w-full bg-pink-400 hover:bg-pink-500 text-white">
               Continuar al sitio
             </Button>
           </Card>
@@ -344,7 +344,7 @@ export default function Home() {
                   onClick={openGoogleMaps}
                   variant="outline"
                   size="sm"
-                  className="mt-2 border-pink-400 text-pink-500 hover:bg-pink-100"
+                  className="mt-2 border-pink-300 text-pink-500 hover:bg-pink-100"
                 >
                   <MapPin className="mr-2 h-4 w-4" /> Ver en Google Maps
                 </Button>
@@ -395,8 +395,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RSVP Section */}
-      <section className="py-16 px-4 bg-muted relative overflow-hidden">
+      {/* RSVP Section - SOLO AQUÍ DEBE APARECER EL FORMULARIO */}
+      <section className="py-16 px-4 bg-pink-50 relative overflow-hidden">
         <motion.div
           style={{
             opacity: opacitySection4,
@@ -409,7 +409,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing text-center mb-8 text-primary"
+            className="text-3xl md:text-4xl font-dancing text-center mb-8 text-pink-500"
           >
             Confirma tu Asistencia
           </motion.h2>
