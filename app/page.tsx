@@ -3,23 +3,21 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ChevronLeft, ChevronRight, Music, MicOffIcon as MusicOff, Send, MapPin } from 'lucide-react'
+import { Music, MicOffIcon as MusicOff, MapPin } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import CountdownTimer from "@/components/countdown-timer"
 import ImageCarousel from "@/components/image-carousel"
 import FloatingElements from "@/components/floating-elements"
 import ParallaxImage from "@/components/parallax-image"
 import RevealText from "@/components/reveal-text"
 import MapComponent from "@/components/map-component"
+import RSVPForm from "@/components/rsvp-form"
 
 export default function Home() {
   const [showModal, setShowModal] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [guests, setGuests] = useState(1)
   const { scrollYProgress } = useScroll()
 
   const opacitySection1 = useTransform(scrollYProgress, [0, 0.2], [0, 1])
@@ -45,21 +43,38 @@ export default function Home() {
     } else {
       audio?.pause()
     }
-  }, [isPlaying])
 
-  const handleRSVP = () => {
-    const phoneNumber = "5255637593877" // +52 55 6375 9387 without spaces or symbols
-    const message = encodeURIComponent(
-      `¡Hola! Confirmo mi asistencia a la quinceañera de Alexa. Asistiré con ${guests} ${guests === 1 ? "invitado" : "invitados"}.`,
-    )
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
-  }
+    // Manejar visibilidad de la página para pausar la música cuando el usuario sale
+    const handleVisibilityChange = () => {
+      if (document.hidden && isPlaying) {
+        audio?.pause()
+      } else if (!document.hidden && isPlaying) {
+        audio?.play().catch((err) => console.error("Error al reanudar audio:", err))
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
+    }
+  }, [isPlaying])
 
   const openGoogleMaps = () => {
     window.open("https://maps.app.goo.gl/DwjoHB5LxES281S89", "_blank")
   }
 
-  const eventDate = new Date("2025-05-17T17:00:00-06:00") // CDMX time zone (UTC-6)
+  // Corregimos la fecha para que sea futura
+  const currentYear = new Date().getFullYear()
+  const eventYear = currentYear + 1 // Siempre un año en el futuro para que el contador funcione
+  const eventDate = new Date(eventYear, 4, 17, 17, 0, 0) // Mayo es 4 (0-indexed)
+
+  console.log("Fecha del evento:", eventDate.toString())
+
+  const closeModal = () => {
+    console.log("Cerrando modal...")
+    setShowModal(false)
+  }
 
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-pink-50 to-pink-100 text-pink-900">
@@ -72,7 +87,7 @@ export default function Home() {
       {/* Music Control */}
       <button
         onClick={() => setIsPlaying(!isPlaying)}
-        className="fixed top-4 right-4 z-50 p-2 bg-pink-200 rounded-full shadow-md hover:bg-pink-300 transition-all"
+        className="fixed top-4 right-4 z-50 p-2 bg-secondary rounded-full shadow-md hover:bg-amber-300 transition-all"
         aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
       >
         {isPlaying ? <MusicOff size={20} /> : <Music size={20} />}
@@ -81,11 +96,11 @@ export default function Home() {
       {/* Countdown Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
-          <Card className="w-[90%] max-w-md p-6 bg-white border-pink-300 shadow-xl">
-            <h2 className="text-2xl font-dancing text-center mb-4 text-pink-500">Faltan</h2>
+          <Card className="w-[90%] max-w-md p-6 bg-white border-secondary shadow-xl">
+            <h2 className="text-2xl font-dancing text-center mb-4 text-primary">Faltan</h2>
             <CountdownTimer targetDate={eventDate} />
             <p className="text-center mt-4 mb-6 font-light">Para la quinceañera de Alexa</p>
-            <Button onClick={() => setShowModal(false)} className="w-full bg-pink-500 hover:bg-pink-600 text-white">
+            <Button onClick={closeModal} className="w-full bg-primary hover:bg-pink-600 text-white">
               Continuar al sitio
             </Button>
           </Card>
@@ -135,7 +150,7 @@ export default function Home() {
             transition={{ delay: 0.9, duration: 0.8 }}
             className="text-lg md:text-xl text-white font-light"
           >
-            17 de Mayo, 2025 • 5:00 PM
+            17 de Mayo, {eventYear} • 5:00 PM
           </motion.p>
         </motion.div>
       </section>
@@ -179,13 +194,7 @@ export default function Home() {
               whileHover={{ scale: 1.05, rotate: -2 }}
               className="bg-white p-4 rounded-lg shadow-md"
             >
-              <Image
-                src="/images/1.jpg"
-                alt="Celebración"
-                width={300}
-                height={300}
-                className="rounded-lg mb-4"
-              />
+              <Image src="/images/1.jpg" alt="Celebración" width={300} height={300} className="rounded-lg mb-4" />
               <h3 className="font-medium text-pink-500">Celebración</h3>
             </motion.div>
             <motion.div
@@ -196,13 +205,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               className="bg-white p-4 rounded-lg shadow-md"
             >
-              <Image
-                src="/images/2.jpg"
-                alt="Baile"
-                width={300}
-                height={300}
-                className="rounded-lg mb-4"
-              />
+              <Image src="/images/2.jpg" alt="Baile" width={300} height={300} className="rounded-lg mb-4" />
               <h3 className="font-medium text-pink-500">Baile</h3>
             </motion.div>
             <motion.div
@@ -213,13 +216,7 @@ export default function Home() {
               whileHover={{ scale: 1.05, rotate: 2 }}
               className="bg-white p-4 rounded-lg shadow-md"
             >
-              <Image
-                src="/images/3.jpg"
-                alt="Amigos"
-                width={300}
-                height={300}
-                className="rounded-lg mb-4"
-              />
+              <Image src="/images/3.jpg" alt="Amigos" width={300} height={300} className="rounded-lg mb-4" />
               <h3 className="font-medium text-pink-500">Amigos</h3>
             </motion.div>
           </div>
@@ -273,9 +270,9 @@ export default function Home() {
               className="bg-white p-6 rounded-lg shadow-md"
             >
               <h3 className="text-xl font-medium mb-4 text-pink-500">Ceremonia</h3>
-              <p className="mb-2">17 de Mayo, 2025</p>
+              <p className="mb-2">17 de Mayo, {eventYear}</p>
               <p className="mb-2">3:00 PM</p>
-              <p>Iglesia Santa María</p>
+              <p>Iglesia San Juan Bautista</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -289,7 +286,7 @@ export default function Home() {
               className="bg-white p-6 rounded-lg shadow-md"
             >
               <h3 className="text-xl font-medium mb-4 text-pink-500">Recepción</h3>
-              <p className="mb-2">17 de Mayo, 2025</p>
+              <p className="mb-2">17 de Mayo, {eventYear}</p>
               <p className="mb-2">5:00 PM</p>
               <p>San Lorenzo Zitlaltepec</p>
             </motion.div>
@@ -375,7 +372,7 @@ export default function Home() {
       </section>
 
       {/* RSVP Section */}
-      <section className="py-16 px-4 bg-pink-100/70 relative overflow-hidden">
+      <section className="py-16 px-4 bg-muted relative overflow-hidden">
         <motion.div
           style={{
             opacity: opacitySection4,
@@ -388,7 +385,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing text-center mb-8 text-pink-500"
+            className="text-3xl md:text-4xl font-dancing text-center mb-8 text-primary"
           >
             Confirma tu Asistencia
           </motion.h2>
@@ -402,72 +399,15 @@ export default function Home() {
               y: -5,
             }}
           >
-            <Card className="p-6 bg-white border-pink-200">
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="guests">Número de invitados</Label>
-                  <div className="flex items-center mt-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      onClick={() => setGuests(Math.max(1, guests - 1))}
-                      className="border-pink-400 text-pink-500"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
-                    <Input
-                      id="guests"
-                      type="number"
-                      min="1"
-                      value={guests}
-                      onChange={(e) => setGuests(Number.parseInt(e.target.value) || 1)}
-                      className="mx-2 text-center border-pink-200"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      onClick={() => setGuests(guests + 1)}
-                      className="border-pink-400 text-pink-500"
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                  <Button onClick={handleRSVP} className="w-full bg-pink-500 hover:bg-pink-600 text-white">
-                    <Send className="mr-2 h-4 w-4" /> Confirmar por WhatsApp
-                  </Button>
-                </motion.div>
-              </div>
-            </Card>
+            <RSVPForm />
           </motion.div>
         </motion.div>
-
-        {/* Decorative elements */}
-        <motion.div
-          style={{
-            x: useTransform(scrollYProgress, [0.6, 0.8], [-100, 100]),
-            y: useTransform(scrollYProgress, [0.6, 0.8], [0, -50]),
-            opacity: useTransform(scrollYProgress, [0.6, 0.7, 0.8], [0, 1, 0]),
-          }}
-          className="absolute top-20 left-10 w-28 h-28 rounded-full bg-pink-200/50 z-0"
-        />
-        <motion.div
-          style={{
-            x: useTransform(scrollYProgress, [0.6, 0.8], [100, -100]),
-            y: useTransform(scrollYProgress, [0.6, 0.8], [0, 50]),
-            opacity: useTransform(scrollYProgress, [0.6, 0.7, 0.8], [0, 1, 0]),
-          }}
-          className="absolute bottom-20 right-10 w-20 h-20 rounded-full bg-pink-300/50 z-0"
-        />
       </section>
 
       {/* Footer */}
       <footer className="py-8 px-4 text-center text-sm bg-pink-50 text-pink-800">
         <p>Con cariño, Alexa y Familia</p>
-        <p className="mt-2">© {new Date().getFullYear()} - Quinceañera de Alexa</p>
+        <p className="mt-2">© {new Date().getFullYear()} - XV años de Alexa</p>
       </footer>
     </main>
   )
