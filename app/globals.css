@@ -3,33 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --background: 350 100% 97%; /* Rosa muy claro para el fondo */
-  --foreground: 340 60% 30%; /* Rosa oscuro para el texto */
+  --background: 20 30% 95%; /* Beige claro para el fondo */
+  --foreground: 350 40% 35%; /* Rosa oscuro para el texto */
 
   --card: 0 0% 100%;
-  --card-foreground: 340 60% 30%;
+  --card-foreground: 350 40% 35%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 340 60% 30%;
+  --popover-foreground: 350 40% 35%;
 
-  --primary: 340 80% 75%; /* Rosa para elementos primarios */
+  --primary: 350 60% 65%; /* Oro rosa para elementos primarios */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 340 100% 90%; /* Rosa claro para elementos secundarios */
-  --secondary-foreground: 340 60% 30%;
+  --secondary: 30 40% 90%; /* Beige para elementos secundarios */
+  --secondary-foreground: 350 40% 35%;
 
-  --muted: 340 30% 96%; /* Rosa muted */
-  --muted-foreground: 340 50% 50%;
+  --muted: 20 30% 96%; /* Beige muted */
+  --muted-foreground: 350 40% 50%;
 
-  --accent: 340 80% 90%; /* Rosa para acentos */
-  --accent-foreground: 340 60% 30%;
+  --accent: 350 60% 75%; /* Oro rosa para acentos */
+  --accent-foreground: 350 40% 35%;
 
   --destructive: 0 100% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 340 70% 80%; /* Bordes rosa */
-  --input: 340 70% 80%;
-  --ring: 340 80% 75%;
+  --border: 350 60% 80%; /* Bordes oro rosa */
+  --input: 350 60% 80%;
+  --ring: 350 60% 65%;
 
   --radius: 0.5rem;
 }
@@ -61,9 +61,9 @@ body {
   }
 }
 
-/* Actualizar el fondo animado con los nuevos colores */
+/* Actualizar el fondo animado con los nuevos colores oro rosa y beige */
 .bg-animate {
-  background: linear-gradient(-45deg, #ffe6f2, #ffcce6, #ffb3d9, #ff99cc);
+  background: linear-gradient(-45deg, #f7e8e1, #e8c6b6, #d4a99a, #c38e7d);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
@@ -110,3 +110,29 @@ body {
 .fade-in {
   animation: fadeIn 1s ease-out forwards;
 }
+
+/* Clases personalizadas para oro rosa y beige */
+.bg-rose-gold {
+  background-color: #d4a99a;
+}
+
+.bg-rose-gold-light {
+  background-color: #e8c6b6;
+}
+
+.bg-beige {
+  background-color: #f7e8e1;
+}
+
+.text-rose-gold {
+  color: #d4a99a;
+}
+
+.border-rose-gold {
+  border-color: #d4a99a;
+}
+
+.hover-rose-gold:hover {
+  background-color: #c38e7d;
+}
+
