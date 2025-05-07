@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 30 30% 98%;
+  --foreground: 20 40% 30%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 20 40% 30%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 40% 30%;
+
+  --primary: 10 50% 70%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 30 30% 96%;
+  --secondary-foreground: 20 40% 30%;
+
+  --muted: 30 30% 96%;
+  --muted-foreground: 20 30% 50%;
+
+  --accent: 30 30% 96%;
+  --accent-foreground: 20 40% 30%;
+
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 20 30% 90%;
+  --input: 20 30% 90%;
+  --ring: 10 50% 70%;
+
+  --radius: 0.5rem;
+}
+
+.font-dancing {
+  font-family: "Dancing Script", cursive;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+/* Animated background */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-animate {
+  background: linear-gradient(-45deg, #f9f3f0, #f8e8e8, #f0d4d4, #e6c0c0);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+/* Shimmer effect */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  transform: rotate(30deg);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(30deg);
+  }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
