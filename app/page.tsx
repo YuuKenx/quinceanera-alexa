@@ -100,7 +100,7 @@ export default function Home() {
           <Card className="w-[90%] max-w-md p-6 bg-white border-secondary shadow-xl">
             <h2 className="text-2xl font-dancing text-center mb-4 text-primary">Faltan</h2>
             <CountdownTimer targetDate={eventDate} />
-            <p className="text-center mt-4 mb-6 font-light">Para la quinceañera de Alexa</p>
+            <p className="text-center mt-4 mb-6 font-light">Para los XV de Alexa</p>
             <Button onClick={closeModal} className="w-full bg-primary hover:bg-pink-600 text-white">
               Continuar al sitio
             </Button>

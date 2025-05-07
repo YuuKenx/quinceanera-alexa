@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Quinceañera de Alexa",
+  title: "XV años de Alexa",
   description: "Celebración de los Quince Años de Alexa",
   generator: "v0.dev",
 }
