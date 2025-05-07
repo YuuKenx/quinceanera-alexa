@@ -14,6 +14,7 @@ import ParallaxImage from "@/components/parallax-image"
 import RevealText from "@/components/reveal-text"
 import MapComponent from "@/components/map-component"
 import RSVPForm from "@/components/rsvp-form"
+import DressCode from "@/components/dress-code"
 
 export default function Home() {
   const [showModal, setShowModal] = useState(true)
@@ -291,7 +292,30 @@ export default function Home() {
               <p>San Lorenzo Zitlaltepec</p>
             </motion.div>
           </div>
+
+          {/* Dress Code Section */}
           <div className="mt-12">
+            <motion.h3
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              className="text-xl font-medium mb-4 text-pink-500"
+            >
+              Código de Vestimenta
+            </motion.h3>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="mb-12"
+            >
+              <DressCode />
+            </motion.div>
+          </div>
+
+          <div className="mt-6">
             <motion.h3
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -17,6 +17,12 @@ export default function RSVPForm() {
   const [relation, setRelation] = useState("familiar")
   const [attendance, setAttendance] = useState("1")
   const [attendeeNames, setAttendeeNames] = useState("")
+  const [showAttendeeField, setShowAttendeeField] = useState(true)
+
+  useEffect(() => {
+    // Mostrar el campo de nombres solo si no seleccionaron "no podemos asistir"
+    setShowAttendeeField(attendance !== "no")
+  }, [attendance])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -120,7 +126,7 @@ export default function RSVPForm() {
           </RadioGroup>
         </div>
 
-        {attendance !== "no" && (
+        {showAttendeeField && (
           <div>
             <Label htmlFor="attendees" className="text-foreground">
               Escribe el nombre de quien asistirá ({attendance} {attendance === "1" ? "Persona" : "Personas"}):
