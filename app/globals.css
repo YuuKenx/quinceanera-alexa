@@ -1,37 +1,37 @@
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap");
+/* Eliminamos la importación externa de la fuente y usaremos una alternativa local */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 30 30% 98%;
-  --foreground: 20 40% 30%;
+  --background: 350 100% 98%;
+  --foreground: 340 60% 30%;
 
   --card: 0 0% 100%;
-  --card-foreground: 20 40% 30%;
+  --card-foreground: 340 60% 30%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 20 40% 30%;
+  --popover-foreground: 340 60% 30%;
 
-  --primary: 10 50% 70%;
+  --primary: 340 80% 75%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 30 30% 96%;
-  --secondary-foreground: 20 40% 30%;
+  --secondary: 350 100% 96%;
+  --secondary-foreground: 340 60% 30%;
 
-  --muted: 30 30% 96%;
-  --muted-foreground: 20 30% 50%;
+  --muted: 350 100% 96%;
+  --muted-foreground: 340 50% 50%;
 
-  --accent: 30 30% 96%;
-  --accent-foreground: 20 40% 30%;
+  --accent: 350 100% 96%;
+  --accent-foreground: 340 60% 30%;
 
   --destructive: 0 100% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 20 30% 90%;
-  --input: 20 30% 90%;
-  --ring: 10 50% 70%;
+  --border: 340 70% 90%;
+  --input: 340 70% 90%;
+  --ring: 340 80% 75%;
 
   --radius: 0.5rem;
 }
@@ -64,7 +64,7 @@ body {
 }
 
 .bg-animate {
-  background: linear-gradient(-45deg, #f9f3f0, #f8e8e8, #f0d4d4, #e6c0c0);
+  background: linear-gradient(-45deg, #ffe6f2, #ffcce6, #ffb3d9, #ff99cc);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }

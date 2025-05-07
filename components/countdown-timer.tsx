@@ -24,6 +24,9 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   useEffect(() => {
     const calculateTimeLeft = () => {
       const difference = targetDate.getTime() - new Date().getTime()
+      console.log("Fecha objetivo:", targetDate.toString())
+      console.log("Fecha actual:", new Date().toString())
+      console.log("Diferencia en ms:", difference)
 
       if (difference > 0) {
         setTimeLeft({
@@ -33,7 +36,8 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
           seconds: Math.floor((difference / 1000) % 60),
         })
       } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        // Si la fecha ya pasó, mostramos al menos 1 día para que no aparezca todo en ceros
+        setTimeLeft({ days: 1, hours: 0, minutes: 0, seconds: 0 })
       }
     }
 
@@ -46,19 +50,19 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   return (
     <div className="grid grid-cols-4 gap-2 text-center">
       <div className="flex flex-col items-center">
-        <div className="text-3xl font-bold text-[#d4a092]">{timeLeft.days}</div>
+        <div className="text-3xl font-bold text-pink-500">{timeLeft.days}</div>
         <div className="text-xs uppercase tracking-wider">Días</div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="text-3xl font-bold text-[#d4a092]">{timeLeft.hours}</div>
+        <div className="text-3xl font-bold text-pink-500">{timeLeft.hours}</div>
         <div className="text-xs uppercase tracking-wider">Horas</div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="text-3xl font-bold text-[#d4a092]">{timeLeft.minutes}</div>
+        <div className="text-3xl font-bold text-pink-500">{timeLeft.minutes}</div>
         <div className="text-xs uppercase tracking-wider">Minutos</div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="text-3xl font-bold text-[#d4a092]">{timeLeft.seconds}</div>
+        <div className="text-3xl font-bold text-pink-500">{timeLeft.seconds}</div>
         <div className="text-xs uppercase tracking-wider">Segundos</div>
       </div>
     </div>
