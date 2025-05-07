@@ -2,30 +2,30 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 
 const images = [
   {
-    src: "/placeholder.svg?key=xnxbk",
+    src: "/images/1.jpg",
     alt: "Celebración de quinceañera",
   },
   {
-    src: "/placeholder.svg?height=600&width=800&query=quinceañera+dress+rose+gold",
+    src: "/images/2.jpg",
     alt: "Vestido de quinceañera",
   },
   {
-    src: "/placeholder.svg?height=600&width=800&query=quinceañera+tiara+elegant",
+    src: "/images/3.jpg",
     alt: "Tiara de quinceañera",
   },
   {
-    src: "/placeholder.svg?height=600&width=800&query=quinceañera+party+elegant",
+    src: "/images/4.jpg",
     alt: "Fiesta de quinceañera",
   },
   {
-    src: "/placeholder.svg?height=600&width=800&query=quinceañera+dance+elegant",
+    src: "/images/5.jpg",
     alt: "Baile de quinceañera",
   },
 ]
@@ -85,7 +85,7 @@ export default function ImageCarousel() {
         onClick={prevSlide}
         aria-label="Imagen anterior"
       >
-        <ChevronLeft className="h-6 w-6 text-[#d4a092]" />
+        <ChevronLeft className="h-6 w-6 text-pink-500" />
       </Button>
 
       <Button
@@ -95,14 +95,14 @@ export default function ImageCarousel() {
         onClick={nextSlide}
         aria-label="Imagen siguiente"
       >
-        <ChevronRight className="h-6 w-6 text-[#d4a092]" />
+        <ChevronRight className="h-6 w-6 text-pink-500" />
       </Button>
 
       <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
         {images.map((_, index) => (
           <button
             key={index}
-            className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-[#d4a092]" : "bg-white/60"}`}
+            className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-pink-500" : "bg-white/60"}`}
             onClick={() => setCurrentIndex(index)}
             aria-label={`Ir a imagen ${index + 1}`}
           />

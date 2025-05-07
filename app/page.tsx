@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ChevronLeft, ChevronRight, Music, MicOffIcon as MusicOff, Send, MapPin } from "lucide-react"
+import { ChevronLeft, ChevronRight, Music, MicOffIcon as MusicOff, Send, MapPin } from 'lucide-react'
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -62,18 +62,17 @@ export default function Home() {
   const eventDate = new Date("2025-05-17T17:00:00-06:00") // CDMX time zone (UTC-6)
 
   return (
-    <main className="relative min-h-screen bg-gradient-to-b from-[#f9f3f0] to-[#f8e8e8] text-[#8a5a44]">
+    <main className="relative min-h-screen bg-gradient-to-b from-pink-50 to-pink-100 text-pink-900">
       <FloatingElements />
       {/* Background Music */}
       <audio id="background-music" loop>
-        <source src="/music/background-music.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
+        <source src="/music/ekkojinx.mp3" type="audio/mp3" />
       </audio>
 
       {/* Music Control */}
       <button
         onClick={() => setIsPlaying(!isPlaying)}
-        className="fixed top-4 right-4 z-50 p-2 bg-[#f0d4d4] rounded-full shadow-md hover:bg-[#e6c0c0] transition-all"
+        className="fixed top-4 right-4 z-50 p-2 bg-pink-200 rounded-full shadow-md hover:bg-pink-300 transition-all"
         aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
       >
         {isPlaying ? <MusicOff size={20} /> : <Music size={20} />}
@@ -82,11 +81,11 @@ export default function Home() {
       {/* Countdown Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
-          <Card className="w-[90%] max-w-md p-6 bg-[#fff9f5] border-[#e6c0c0] shadow-xl">
-            <h2 className="text-2xl font-dancing text-center mb-4 text-[#d4a092]">Faltan</h2>
+          <Card className="w-[90%] max-w-md p-6 bg-white border-pink-300 shadow-xl">
+            <h2 className="text-2xl font-dancing text-center mb-4 text-pink-500">Faltan</h2>
             <CountdownTimer targetDate={eventDate} />
             <p className="text-center mt-4 mb-6 font-light">Para la quinceañera de Alexa</p>
-            <Button onClick={() => setShowModal(false)} className="w-full bg-[#d4a092] hover:bg-[#c08e82] text-white">
+            <Button onClick={() => setShowModal(false)} className="w-full bg-pink-500 hover:bg-pink-600 text-white">
               Continuar al sitio
             </Button>
           </Card>
@@ -96,8 +95,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <ParallaxImage src="/placeholder.svg?key=bm06h" alt="Fondo de quinceañera" className="absolute inset-0" />
-          <div className="absolute inset-0 bg-black/30" />
+          <ParallaxImage src="/images/1.jpg" alt="Fondo de quinceañera" className="absolute inset-0" />
+          <div className="absolute inset-0 bg-pink-900/40" />
         </div>
 
         <motion.div
@@ -144,13 +143,13 @@ export default function Home() {
       {/* Carousel Section */}
       <section className="py-16 px-4">
         <motion.div style={{ opacity: opacitySection1 }} className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-dancing text-center mb-12 text-[#d4a092]">Momentos Especiales</h2>
+          <h2 className="text-3xl md:text-4xl font-dancing text-center mb-12 text-pink-500">Momentos Especiales</h2>
           <ImageCarousel />
         </motion.div>
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-4 bg-[#f0d4d4]/30 relative overflow-hidden">
+      <section className="py-16 px-4 bg-pink-100/70 relative overflow-hidden">
         <motion.div
           style={{
             opacity: opacitySection2,
@@ -163,7 +162,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing mb-8 text-[#d4a092]"
+            className="text-3xl md:text-4xl font-dancing mb-8 text-pink-500"
           >
             Sobre Alexa
           </motion.h2>
@@ -181,13 +180,13 @@ export default function Home() {
               className="bg-white p-4 rounded-lg shadow-md"
             >
               <Image
-                src="/placeholder.svg?key=iv07c"
+                src="/images/1.jpg"
                 alt="Celebración"
                 width={300}
                 height={300}
                 className="rounded-lg mb-4"
               />
-              <h3 className="font-medium text-[#d4a092]">Celebración</h3>
+              <h3 className="font-medium text-pink-500">Celebración</h3>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -198,13 +197,13 @@ export default function Home() {
               className="bg-white p-4 rounded-lg shadow-md"
             >
               <Image
-                src="/placeholder.svg?key=lv0il"
+                src="/images/2.jpg"
                 alt="Baile"
                 width={300}
                 height={300}
                 className="rounded-lg mb-4"
               />
-              <h3 className="font-medium text-[#d4a092]">Baile</h3>
+              <h3 className="font-medium text-pink-500">Baile</h3>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -215,13 +214,13 @@ export default function Home() {
               className="bg-white p-4 rounded-lg shadow-md"
             >
               <Image
-                src="/placeholder.svg?key=us3db"
+                src="/images/3.jpg"
                 alt="Amigos"
                 width={300}
                 height={300}
                 className="rounded-lg mb-4"
               />
-              <h3 className="font-medium text-[#d4a092]">Amigos</h3>
+              <h3 className="font-medium text-pink-500">Amigos</h3>
             </motion.div>
           </div>
         </motion.div>
@@ -232,14 +231,14 @@ export default function Home() {
             x: useTransform(scrollYProgress, [0.2, 0.4], [-100, 100]),
             opacity: useTransform(scrollYProgress, [0.2, 0.25, 0.4], [0, 1, 0]),
           }}
-          className="absolute top-20 left-10 w-20 h-20 rounded-full bg-[#f8d0c8]/30 z-0"
+          className="absolute top-20 left-10 w-20 h-20 rounded-full bg-pink-300/50 z-0"
         />
         <motion.div
           style={{
             x: useTransform(scrollYProgress, [0.2, 0.4], [100, -100]),
             opacity: useTransform(scrollYProgress, [0.2, 0.3, 0.4], [0, 1, 0]),
           }}
-          className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-[#f8d0c8]/20 z-0"
+          className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-pink-200/50 z-0"
         />
       </section>
 
@@ -257,7 +256,7 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing mb-8 text-[#d4a092]"
+            className="text-3xl md:text-4xl font-dancing mb-8 text-pink-500"
           >
             Detalles del Evento
           </motion.h2>
@@ -273,7 +272,7 @@ export default function Home() {
               }}
               className="bg-white p-6 rounded-lg shadow-md"
             >
-              <h3 className="text-xl font-medium mb-4 text-[#d4a092]">Ceremonia</h3>
+              <h3 className="text-xl font-medium mb-4 text-pink-500">Ceremonia</h3>
               <p className="mb-2">17 de Mayo, 2025</p>
               <p className="mb-2">3:00 PM</p>
               <p>Iglesia Santa María</p>
@@ -289,7 +288,7 @@ export default function Home() {
               }}
               className="bg-white p-6 rounded-lg shadow-md"
             >
-              <h3 className="text-xl font-medium mb-4 text-[#d4a092]">Recepción</h3>
+              <h3 className="text-xl font-medium mb-4 text-pink-500">Recepción</h3>
               <p className="mb-2">17 de Mayo, 2025</p>
               <p className="mb-2">5:00 PM</p>
               <p>San Lorenzo Zitlaltepec</p>
@@ -301,7 +300,7 @@ export default function Home() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.8 }}
-              className="text-xl font-medium mb-4 text-[#d4a092]"
+              className="text-xl font-medium mb-4 text-pink-500"
             >
               Ubicación
             </motion.h3>
@@ -324,7 +323,7 @@ export default function Home() {
                   onClick={openGoogleMaps}
                   variant="outline"
                   size="sm"
-                  className="mt-2 border-[#d4a092] text-[#d4a092] hover:bg-[#d4a092]/10"
+                  className="mt-2 border-pink-400 text-pink-500 hover:bg-pink-100"
                 >
                   <MapPin className="mr-2 h-4 w-4" /> Ver en Google Maps
                 </Button>
@@ -339,14 +338,14 @@ export default function Home() {
             rotate: useTransform(scrollYProgress, [0.4, 0.6], [0, 180]),
             opacity: useTransform(scrollYProgress, [0.4, 0.5, 0.6], [0, 1, 0]),
           }}
-          className="absolute top-40 right-10 w-24 h-24 rounded-full border-4 border-[#f8d0c8]/30 z-0"
+          className="absolute top-40 right-10 w-24 h-24 rounded-full border-4 border-pink-300/50 z-0"
         />
         <motion.div
           style={{
             scale: useTransform(scrollYProgress, [0.4, 0.6], [0.5, 1.5]),
             opacity: useTransform(scrollYProgress, [0.4, 0.5, 0.6], [0, 1, 0]),
           }}
-          className="absolute bottom-40 left-10 w-16 h-16 rounded-full bg-[#f8d0c8]/20 z-0"
+          className="absolute bottom-40 left-10 w-16 h-16 rounded-full bg-pink-200/50 z-0"
         />
       </section>
 
@@ -360,15 +359,15 @@ export default function Home() {
             transition={{ duration: 1.5 }}
             className="relative"
           >
-            <div className="absolute -top-10 -left-10 w-20 h-20 text-6xl opacity-20 font-dancing text-[#d4a092]">"</div>
-            <RevealText className="text-2xl md:text-3xl font-dancing text-[#d4a092] italic mb-6">
+            <div className="absolute -top-10 -left-10 w-20 h-20 text-6xl opacity-20 font-dancing text-pink-500">"</div>
+            <RevealText className="text-2xl md:text-3xl font-dancing text-pink-500 italic mb-6">
               Cada momento es un regalo, cada sonrisa un tesoro. En mis quince años, celebro la vida y los sueños por
               cumplir.
             </RevealText>
-            <div className="absolute -bottom-10 -right-10 w-20 h-20 text-6xl opacity-20 font-dancing text-[#d4a092] rotate-180">
+            <div className="absolute -bottom-10 -right-10 w-20 h-20 text-6xl opacity-20 font-dancing text-pink-500 rotate-180">
               "
             </div>
-            <RevealText delay={0.4} className="text-lg text-[#8a5a44]">
+            <RevealText delay={0.4} className="text-lg text-pink-800">
               - Alexa
             </RevealText>
           </motion.div>
@@ -376,7 +375,7 @@ export default function Home() {
       </section>
 
       {/* RSVP Section */}
-      <section className="py-16 px-4 bg-[#f0d4d4]/30 relative overflow-hidden">
+      <section className="py-16 px-4 bg-pink-100/70 relative overflow-hidden">
         <motion.div
           style={{
             opacity: opacitySection4,
@@ -389,7 +388,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing text-center mb-8 text-[#d4a092]"
+            className="text-3xl md:text-4xl font-dancing text-center mb-8 text-pink-500"
           >
             Confirma tu Asistencia
           </motion.h2>
@@ -403,7 +402,7 @@ export default function Home() {
               y: -5,
             }}
           >
-            <Card className="p-6 bg-white">
+            <Card className="p-6 bg-white border-pink-200">
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="guests">Número de invitados</Label>
@@ -413,7 +412,7 @@ export default function Home() {
                       variant="outline"
                       size="icon"
                       onClick={() => setGuests(Math.max(1, guests - 1))}
-                      className="border-[#d4a092] text-[#d4a092]"
+                      className="border-pink-400 text-pink-500"
                     >
                       <ChevronLeft className="h-4 w-4" />
                     </Button>
@@ -423,21 +422,21 @@ export default function Home() {
                       min="1"
                       value={guests}
                       onChange={(e) => setGuests(Number.parseInt(e.target.value) || 1)}
-                      className="mx-2 text-center"
+                      className="mx-2 text-center border-pink-200"
                     />
                     <Button
                       type="button"
                       variant="outline"
                       size="icon"
                       onClick={() => setGuests(guests + 1)}
-                      className="border-[#d4a092] text-[#d4a092]"
+                      className="border-pink-400 text-pink-500"
                     >
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                  <Button onClick={handleRSVP} className="w-full bg-[#d4a092] hover:bg-[#c08e82] text-white">
+                  <Button onClick={handleRSVP} className="w-full bg-pink-500 hover:bg-pink-600 text-white">
                     <Send className="mr-2 h-4 w-4" /> Confirmar por WhatsApp
                   </Button>
                 </motion.div>
@@ -453,7 +452,7 @@ export default function Home() {
             y: useTransform(scrollYProgress, [0.6, 0.8], [0, -50]),
             opacity: useTransform(scrollYProgress, [0.6, 0.7, 0.8], [0, 1, 0]),
           }}
-          className="absolute top-20 left-10 w-28 h-28 rounded-full bg-[#f8d0c8]/20 z-0"
+          className="absolute top-20 left-10 w-28 h-28 rounded-full bg-pink-200/50 z-0"
         />
         <motion.div
           style={{
@@ -461,12 +460,12 @@ export default function Home() {
             y: useTransform(scrollYProgress, [0.6, 0.8], [0, 50]),
             opacity: useTransform(scrollYProgress, [0.6, 0.7, 0.8], [0, 1, 0]),
           }}
-          className="absolute bottom-20 right-10 w-20 h-20 rounded-full bg-[#f8d0c8]/30 z-0"
+          className="absolute bottom-20 right-10 w-20 h-20 rounded-full bg-pink-300/50 z-0"
         />
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 text-center text-sm">
+      <footer className="py-8 px-4 text-center text-sm bg-pink-50 text-pink-800">
         <p>Con cariño, Alexa y Familia</p>
         <p className="mt-2">© {new Date().getFullYear()} - Quinceañera de Alexa</p>
       </footer>
