@@ -3,39 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: 20 30% 95%; /* Beige claro para el fondo */
-  --foreground: 350 40% 35%; /* Rosa oscuro para el texto */
+  --background: 30 30% 94%;
+  --foreground: 20 20% 30%;
 
-  --card: 0 0% 100%;
-  --card-foreground: 350 40% 35%;
+  --card: 30 30% 98%;
+  --card-foreground: 20 20% 30%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 350 40% 35%;
+  --popover: 30 30% 98%;
+  --popover-foreground: 20 20% 30%;
 
-  --primary: 350 60% 65%; /* Oro rosa para elementos primarios */
-  --primary-foreground: 0 0% 100%;
+  --primary: 350 40% 70%;
+  --primary-foreground: 30 30% 98%;
 
-  --secondary: 30 40% 90%; /* Beige para elementos secundarios */
-  --secondary-foreground: 350 40% 35%;
+  --secondary: 30 30% 94%;
+  --secondary-foreground: 20 20% 30%;
 
-  --muted: 20 30% 96%; /* Beige muted */
-  --muted-foreground: 350 40% 50%;
+  --muted: 30 30% 94%;
+  --muted-foreground: 20 20% 50%;
 
-  --accent: 350 60% 75%; /* Oro rosa para acentos */
-  --accent-foreground: 350 40% 35%;
+  --accent: 30 30% 94%;
+  --accent-foreground: 20 20% 30%;
 
   --destructive: 0 100% 50%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: 30 30% 98%;
 
-  --border: 350 60% 80%; /* Bordes oro rosa */
-  --input: 350 60% 80%;
-  --ring: 350 60% 65%;
+  --border: 30 30% 85%;
+  --input: 30 30% 85%;
+  --ring: 350 40% 70%;
 
   --radius: 0.5rem;
-}
-
-.font-dancing {
-  font-family: "Dancing Script", cursive;
 }
 
 body {
@@ -61,9 +57,8 @@ body {
   }
 }
 
-/* Actualizar el fondo animado con los nuevos colores oro rosa y beige */
 .bg-animate {
-  background: linear-gradient(-45deg, #f7e8e1, #e8c6b6, #d4a99a, #c38e7d);
+  background: linear-gradient(-45deg, #e0bfb8, #dba8a1, #b76e79, #d6cfc7);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
@@ -111,28 +106,30 @@ body {
   animation: fadeIn 1s ease-out forwards;
 }
 
-/* Clases personalizadas para oro rosa y beige */
+.rose-gold {
+  color: #b76e79;
+}
+
 .bg-rose-gold {
-  background-color: #d4a99a;
+  background-color: #b76e79;
 }
 
 .bg-rose-gold-light {
-  background-color: #e8c6b6;
+  background-color: #e0bfb8;
 }
 
 .bg-beige {
-  background-color: #f7e8e1;
+  background-color: #f5f5dc;
 }
 
-.text-rose-gold {
-  color: #d4a99a;
+.bg-beige-light {
+  background-color: #e8e6d9;
 }
 
 .border-rose-gold {
-  border-color: #d4a99a;
+  border-color: #b76e79;
 }
 
-.hover-rose-gold:hover {
-  background-color: #c38e7d;
+.text-rose-gold {
+  color: #b76e79;
 }
-

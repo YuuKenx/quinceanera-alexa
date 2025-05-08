@@ -20,7 +20,7 @@ export default function FloatingElements() {
   useEffect(() => {
     // Generate random floating elements
     const newElements: FloatingElement[] = []
-    const colors = ["#ffcce6", "#ffb3d9", "#ff99cc", "#ff80bf", "#ff66b3"]
+    const colors = ["#e0bfb8", "#dba8a1", "#b76e79", "#d6cfc7", "#f5f5dc"]
 
     for (let i = 0; i < 15; i++) {
       newElements.push({

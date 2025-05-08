@@ -5,11 +5,24 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function ImageCarousel() {
-  // Definimos las imágenes directamente en el componente
+  // Definimos las imágenes con las URLs proporcionadas
   const images = [
-    { src: "/images/1.jpg", alt: "Imagen 1" },
-    { src: "/images/2.jpg", alt: "Imagen 2" },
-    { src: "/images/3.jpg", alt: "Imagen 3" },
+    {
+      src: "/images/1.jpg",
+      alt: "Invitación elegante",
+    },
+    {
+      src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2.jpg-Ail5QSgBKDyXTMsehMo4DNmzGwS3m9.jpeg",
+      alt: "Alexa en vestido rosa",
+    },
+    {
+      src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6.jpg-3wbXnxTPlR48B1sBLKhm19nTn3Nm5l.jpeg",
+      alt: "Alexa en escaleras elegantes",
+    },
+    {
+      src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7.jpg-hGuGjHSDVlAPxYtADQlC7rphwpO4Pj.jpeg",
+      alt: "Vestido elegante dorado",
+    },
   ]
 
   const [currentIndex, setCurrentIndex] = useState(0)

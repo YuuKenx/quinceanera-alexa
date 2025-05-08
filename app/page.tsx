@@ -1,63 +1,42 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Music, MicOffIcon as MusicOff, MapPin } from "lucide-react"
+import { Music, MicOff, MapPin } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import CountdownTimer from "@/components/countdown-timer"
 import ImageCarousel from "@/components/image-carousel"
 import FloatingElements from "@/components/floating-elements"
-import ParallaxImage from "@/components/parallax-image"
 import RevealText from "@/components/reveal-text"
 import MapComponent from "@/components/map-component"
 import RSVPForm from "@/components/rsvp-form"
 import DressCode from "@/components/dress-code"
+import ParticleBackground from "@/components/particle-background"
+import InteractiveTimeline from "@/components/interactive-timeline"
+import ConfettiButton from "@/components/confetti-button"
 
 export default function Home() {
   const [showModal, setShowModal] = useState(true)
   const [isPlaying, setIsPlaying] = useState(false)
   const { scrollYProgress } = useScroll()
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   const opacitySection1 = useTransform(scrollYProgress, [0, 0.2], [0, 1])
   const opacitySection2 = useTransform(scrollYProgress, [0.2, 0.4], [0, 1])
   const opacitySection3 = useTransform(scrollYProgress, [0.4, 0.6], [0, 1])
   const opacitySection4 = useTransform(scrollYProgress, [0.6, 0.8], [0, 1])
 
-  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8])
-  const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -50])
-  const carouselX = useTransform(scrollYProgress, [0.1, 0.3], [-50, 0])
-  const aboutImagesScale = useTransform(scrollYProgress, [0.3, 0.5], [0.8, 1])
-  const detailsRotate = useTransform(scrollYProgress, [0.5, 0.7], [-5, 0])
-  const rsvpScale = useTransform(scrollYProgress, [0.7, 0.9], [0.9, 1])
-
   useEffect(() => {
-    const audio = document.getElementById("background-music") as HTMLAudioElement
-
-    if (isPlaying) {
-      audio?.play().catch((error) => {
+    if (isPlaying && audioRef.current) {
+      audioRef.current.play().catch((error) => {
         console.error("Audio playback failed:", error)
         setIsPlaying(false)
       })
-    } else {
-      audio?.pause()
-    }
-
-    // Manejar visibilidad de la página para pausar la música cuando el usuario sale
-    const handleVisibilityChange = () => {
-      if (document.hidden && isPlaying) {
-        audio?.pause()
-      } else if (!document.hidden && isPlaying) {
-        audio?.play().catch((err) => console.error("Error al reanudar audio:", err))
-      }
-    }
-
-    document.addEventListener("visibilitychange", handleVisibilityChange)
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange)
+    } else if (audioRef.current) {
+      audioRef.current.pause()
     }
   }, [isPlaying])
 
@@ -65,43 +44,39 @@ export default function Home() {
     window.open("https://maps.app.goo.gl/DwjoHB5LxES281S89", "_blank")
   }
 
-  // Corregimos la fecha para que sea futura
-  const currentYear = new Date().getFullYear()
-  const eventYear = currentYear + 1 // Siempre un año en el futuro para que el contador funcione
-  const eventDate = new Date(eventYear, 4, 17, 17, 0, 0) // Mayo es 4 (0-indexed)
-
-  console.log("Fecha del evento:", eventDate.toString())
-
-  const closeModal = () => {
-    console.log("Cerrando modal...")
-    setShowModal(false)
-  }
+  const eventDate = new Date("2025-05-17T17:00:00-06:00") // CDMX time zone (UTC-6)
 
   return (
-    <main className="relative min-h-screen bg-pink-50 text-pink-900">
+    <main className="relative min-h-screen bg-gradient-to-b from-beige-light to-beige text-gray-800">
+      <ParticleBackground />
       <FloatingElements />
-      {/* Background Music */}
-      <audio id="background-music" loop>
-        <source src="/music/ekkojinx.mp3" type="audio/mp3" />
+
+      {/* Background Music - Actualizado con el nuevo nombre de archivo */}
+      <audio ref={audioRef} loop>
+        <source src="/music/musica.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
       </audio>
 
       {/* Music Control */}
       <button
         onClick={() => setIsPlaying(!isPlaying)}
-        className="fixed top-4 right-4 z-50 p-2 bg-pink-200 rounded-full shadow-md hover:bg-pink-300 transition-all"
+        className="fixed top-4 right-4 z-50 p-2 bg-rose-gold-light rounded-full shadow-md hover:bg-rose-gold transition-all"
         aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
       >
-        {isPlaying ? <MusicOff size={20} /> : <Music size={20} />}
+        {isPlaying ? <MicOff size={20} className="text-white" /> : <Music size={20} className="text-white" />}
       </button>
 
       {/* Countdown Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
-          <Card className="w-[90%] max-w-md p-6 bg-white border-pink-200 shadow-xl">
-            <h2 className="text-2xl font-dancing text-center mb-4 text-pink-500">Faltan</h2>
+          <Card className="w-[90%] max-w-md p-6 bg-beige border-rose-gold shadow-xl">
+            <h2 className="text-2xl text-center mb-4 text-rose-gold font-bold">Faltan</h2>
             <CountdownTimer targetDate={eventDate} />
-            <p className="text-center mt-4 mb-6 font-light">Para la quinceañera de Alexa</p>
-            <Button onClick={closeModal} className="w-full bg-pink-400 hover:bg-pink-500 text-white">
+            <p className="text-center mt-4 mb-6 font-light">Para los XV de Alexa</p>
+            <Button
+              onClick={() => setShowModal(false)}
+              className="w-full bg-rose-gold hover:bg-rose-gold/80 text-white"
+            >
               Continuar al sitio
             </Button>
           </Card>
@@ -111,8 +86,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <ParallaxImage src="/images/1.jpg" alt="Fondo de quinceañera" className="absolute inset-0" />
-          <div className="absolute inset-0 bg-pink-900/40" />
+          <Image src="/images/1.jpg" alt="Alexa Quinceañera" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-black/30" />
         </div>
 
         <motion.div
@@ -133,7 +108,7 @@ export default function Home() {
               duration: 0.8,
               type: "spring",
             }}
-            className="text-5xl md:text-7xl font-dancing text-white mb-4"
+            className="text-5xl md:text-7xl font-bold text-white mb-4"
           >
             Alexa
           </motion.h1>
@@ -151,21 +126,32 @@ export default function Home() {
             transition={{ delay: 0.9, duration: 0.8 }}
             className="text-lg md:text-xl text-white font-light"
           >
-            17 de Mayo, {eventYear} • 5:00 PM
+            17 de Mayo, 2025 • 5:00 PM
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="mt-8"
+          >
+            <ConfettiButton />
+          </motion.div>
         </motion.div>
       </section>
+
+      {/* Resto del código permanece igual... */}
 
       {/* Carousel Section */}
       <section className="py-16 px-4">
         <motion.div style={{ opacity: opacitySection1 }} className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-dancing text-center mb-12 text-pink-500">Momentos Especiales</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-rose-gold mb-12">Momentos Especiales</h2>
           <ImageCarousel />
         </motion.div>
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-4 bg-pink-100/70 relative overflow-hidden">
+      <section className="py-16 px-4 bg-rose-gold-light/50 relative overflow-hidden">
         <motion.div
           style={{
             opacity: opacitySection2,
@@ -178,7 +164,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing mb-8 text-pink-500"
+            className="text-3xl md:text-4xl font-bold mb-8 text-rose-gold"
           >
             Sobre Alexa
           </motion.h2>
@@ -195,8 +181,14 @@ export default function Home() {
               whileHover={{ scale: 1.05, rotate: -2 }}
               className="bg-white p-4 rounded-lg shadow-md"
             >
-              <Image src="/images/1.jpg" alt="Celebración" width={300} height={300} className="rounded-lg mb-4" />
-              <h3 className="font-medium text-pink-500">Celebración</h3>
+              <Image
+                src="/images/3.jpg"
+                alt="Celebración"
+                width={300}
+                height={300}
+                className="rounded-lg mb-4 w-full h-64 object-cover"
+              />
+              <h3 className="font-medium text-rose-gold">Celebración</h3>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -206,8 +198,14 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               className="bg-white p-4 rounded-lg shadow-md"
             >
-              <Image src="/images/2.jpg" alt="Baile" width={300} height={300} className="rounded-lg mb-4" />
-              <h3 className="font-medium text-pink-500">Baile</h3>
+              <Image
+                src="/images/5.jpg"
+                alt="Tradición"
+                width={300}
+                height={300}
+                className="rounded-lg mb-4 w-full h-64 object-cover"
+              />
+              <h3 className="font-medium text-rose-gold">Tradición</h3>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -217,27 +215,22 @@ export default function Home() {
               whileHover={{ scale: 1.05, rotate: 2 }}
               className="bg-white p-4 rounded-lg shadow-md"
             >
-              <Image src="/images/3.jpg" alt="Amigos" width={300} height={300} className="rounded-lg mb-4" />
-              <h3 className="font-medium text-pink-500">Amigos</h3>
+              <Image
+                src="/images/1.jpg"
+                alt="Invitación"
+                width={300}
+                height={300}
+                className="rounded-lg mb-4 w-full h-64 object-cover"
+              />
+              <h3 className="font-medium text-rose-gold">Invitación</h3>
             </motion.div>
           </div>
         </motion.div>
+      </section>
 
-        {/* Decorative elements */}
-        <motion.div
-          style={{
-            x: useTransform(scrollYProgress, [0.2, 0.4], [-100, 100]),
-            opacity: useTransform(scrollYProgress, [0.2, 0.25, 0.4], [0, 1, 0]),
-          }}
-          className="absolute top-20 left-10 w-20 h-20 rounded-full bg-pink-300/50 z-0"
-        />
-        <motion.div
-          style={{
-            x: useTransform(scrollYProgress, [0.2, 0.4], [100, -100]),
-            opacity: useTransform(scrollYProgress, [0.2, 0.3, 0.4], [0, 1, 0]),
-          }}
-          className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-pink-200/50 z-0"
-        />
+      {/* Timeline Section */}
+      <section className="py-16 px-4 relative overflow-hidden">
+        <InteractiveTimeline />
       </section>
 
       {/* Event Details */}
@@ -254,7 +247,7 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing mb-8 text-pink-500"
+            className="text-3xl md:text-4xl font-bold mb-8 text-rose-gold"
           >
             Detalles del Evento
           </motion.h2>
@@ -270,8 +263,8 @@ export default function Home() {
               }}
               className="bg-white p-6 rounded-lg shadow-md"
             >
-              <h3 className="text-xl font-medium mb-4 text-pink-500">Ceremonia</h3>
-              <p className="mb-2">17 de Mayo, {eventYear}</p>
+              <h3 className="text-xl font-medium mb-4 text-rose-gold">Ceremonia</h3>
+              <p className="mb-2">17 de Mayo, 2025</p>
               <p className="mb-2">3:00 PM</p>
               <p>Iglesia San Juan Bautista</p>
             </motion.div>
@@ -286,42 +279,26 @@ export default function Home() {
               }}
               className="bg-white p-6 rounded-lg shadow-md"
             >
-              <h3 className="text-xl font-medium mb-4 text-pink-500">Recepción</h3>
-              <p className="mb-2">17 de Mayo, {eventYear}</p>
+              <h3 className="text-xl font-medium mb-4 text-rose-gold">Recepción</h3>
+              <p className="mb-2">17 de Mayo, 2025</p>
               <p className="mb-2">5:00 PM</p>
               <p>San Lorenzo Zitlaltepec</p>
             </motion.div>
           </div>
 
-          {/* Dress Code Section */}
+          {/* Dress Code */}
+          <div className="mt-12">
+            <DressCode />
+          </div>
+
+          {/* Map */}
           <div className="mt-12">
             <motion.h3
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.7, duration: 0.8 }}
-              className="text-xl font-medium mb-4 text-pink-500"
-            >
-              Código de Vestimenta
-            </motion.h3>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="mb-12"
-            >
-              <DressCode />
-            </motion.div>
-          </div>
-
-          <div className="mt-6">
-            <motion.h3
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              className="text-xl font-medium mb-4 text-pink-500"
+              className="text-xl font-medium mb-4 text-rose-gold"
             >
               Ubicación
             </motion.h3>
@@ -344,7 +321,7 @@ export default function Home() {
                   onClick={openGoogleMaps}
                   variant="outline"
                   size="sm"
-                  className="mt-2 border-pink-300 text-pink-500 hover:bg-pink-100"
+                  className="mt-2 border-rose-gold text-rose-gold hover:bg-rose-gold/80"
                 >
                   <MapPin className="mr-2 h-4 w-4" /> Ver en Google Maps
                 </Button>
@@ -352,22 +329,6 @@ export default function Home() {
             </motion.div>
           </div>
         </motion.div>
-
-        {/* Decorative elements */}
-        <motion.div
-          style={{
-            rotate: useTransform(scrollYProgress, [0.4, 0.6], [0, 180]),
-            opacity: useTransform(scrollYProgress, [0.4, 0.5, 0.6], [0, 1, 0]),
-          }}
-          className="absolute top-40 right-10 w-24 h-24 rounded-full border-4 border-pink-300/50 z-0"
-        />
-        <motion.div
-          style={{
-            scale: useTransform(scrollYProgress, [0.4, 0.6], [0.5, 1.5]),
-            opacity: useTransform(scrollYProgress, [0.4, 0.5, 0.6], [0, 1, 0]),
-          }}
-          className="absolute bottom-40 left-10 w-16 h-16 rounded-full bg-pink-200/50 z-0"
-        />
       </section>
 
       {/* Special Message Section */}
@@ -380,23 +341,23 @@ export default function Home() {
             transition={{ duration: 1.5 }}
             className="relative"
           >
-            <div className="absolute -top-10 -left-10 w-20 h-20 text-6xl opacity-20 font-dancing text-pink-500">"</div>
-            <RevealText className="text-2xl md:text-3xl font-dancing text-pink-500 italic mb-6">
+            <div className="absolute -top-10 -left-10 w-20 h-20 text-6xl opacity-20 font-bold text-rose-gold">"</div>
+            <RevealText className="text-2xl md:text-3xl italic mb-6 text-rose-gold">
               Cada momento es un regalo, cada sonrisa un tesoro. En mis quince años, celebro la vida y los sueños por
               cumplir.
             </RevealText>
-            <div className="absolute -bottom-10 -right-10 w-20 h-20 text-6xl opacity-20 font-dancing text-pink-500 rotate-180">
+            <div className="absolute -bottom-10 -right-10 w-20 h-20 text-6xl opacity-20 font-bold text-rose-gold rotate-180">
               "
             </div>
-            <RevealText delay={0.4} className="text-lg text-pink-800">
+            <RevealText delay={0.4} className="text-lg text-gray-700">
               - Alexa
             </RevealText>
           </motion.div>
         </div>
       </section>
 
-      {/* RSVP Section - SOLO AQUÍ DEBE APARECER EL FORMULARIO */}
-      <section className="py-16 px-4 bg-pink-50 relative overflow-hidden">
+      {/* RSVP Section */}
+      <section className="py-16 px-4 bg-rose-gold-light/50 relative overflow-hidden">
         <motion.div
           style={{
             opacity: opacitySection4,
@@ -409,7 +370,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-dancing text-center mb-8 text-pink-500"
+            className="text-3xl md:text-4xl font-bold text-center mb-8 text-rose-gold"
           >
             Confirma tu Asistencia
           </motion.h2>
@@ -429,9 +390,9 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 text-center text-sm bg-pink-50 text-pink-800">
+      <footer className="py-8 px-4 text-center text-sm">
         <p>Con cariño, Alexa y Familia</p>
-        <p className="mt-2">© {new Date().getFullYear()} - XV años de Alexa</p>
+        <p className="mt-2">© {new Date().getFullYear()} - Mis XV años - Alexa</p>
       </footer>
     </main>
   )
