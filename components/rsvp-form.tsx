@@ -21,7 +21,7 @@ export default function RSVPForm() {
     e.preventDefault()
 
     // Construir el mensaje para WhatsApp
-    let message = `¡Hola! Confirmo mi asistencia a la quinceañera de Alexa.\n\n`
+    let message = `¡Hola! Confirmo mi asistencia a los XV años de Alexa.\n\n`
     message += `Nombre: ${name}\n`
     message += `Soy: ${relation === "familiar" ? "Familiar" : "Amigo/a"}\n`
 
