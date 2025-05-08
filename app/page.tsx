@@ -15,7 +15,8 @@ import MapComponent from "@/components/map-component"
 import RSVPForm from "@/components/rsvp-form"
 import DressCode from "@/components/dress-code"
 import ParticleBackground from "@/components/particle-background"
-import InteractiveTimeline from "@/components/interactive-timeline"
+// Comentamos la importación del cronograma temporalmente
+// import InteractiveTimeline from "@/components/interactive-timeline"
 import ConfettiButton from "@/components/confetti-button"
 
 export default function Home() {
@@ -140,8 +141,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Resto del código permanece igual... */}
-
       {/* Carousel Section */}
       <section className="py-16 px-4">
         <motion.div style={{ opacity: opacitySection1 }} className="max-w-5xl mx-auto">
@@ -228,10 +227,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-16 px-4 relative overflow-hidden">
-        <InteractiveTimeline />
-      </section>
+      {/* Se ha eliminado temporalmente la sección del cronograma */}
 
       {/* Event Details */}
       <section className="py-16 px-4 relative overflow-hidden">
