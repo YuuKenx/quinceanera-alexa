@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] })
 // Cambiar el título de la página
 export const metadata: Metadata = {
   title: "Mis XV años - Alexa",
-  description: "Celebración de los quince años de Alexa",
+  description: "Los XV años de Alexa",
     generator: 'v0.dev'
 }
 
