@@ -109,10 +109,26 @@ export default function Home() {
               duration: 0.8,
               type: "spring",
             }}
-            className="text-5xl md:text-7xl font-bold text-white mb-4"
+            className="text-5xl md:text-7xl font-bold text-white mb-2"
           >
             Alexa
           </motion.h1>
+
+          {/* Nombres de la madrina y la mamá */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="mb-6 text-white"
+          >
+            <p className="italic text-sm md:text-base mb-1">
+              <span className="font-normal">Madrina:</span> Margarita Hernández
+            </p>
+            <p className="italic text-sm md:text-base">
+              <span className="font-normal">Mamá:</span> Guadalupe Hernández
+            </p>
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
