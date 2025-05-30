@@ -22,7 +22,7 @@ export default function DressCode() {
           </div>
         </div>
 
-        <RevealText className="text-foreground mb-4">Se solicita vestimenta formal para la ocasión.</RevealText>
+        <RevealText className="text-foreground mb-4">Se solicita vestimenta formal para la ocasión. Por favor</RevealText>
       </div>
     </Card>
   )
